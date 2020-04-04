@@ -3,9 +3,16 @@
 {% block body %}
 <h3>Add a route to your city by filling up the form below</h3>
 <br>
-<form action="{% url 'employees:add' %}" method="post">
+<form action="{% url 'employees:add' %}" method="post" style="display: flex; flex-direction: column;">
 	{% csrf_token %}
-		{{ form.as_p }}
+		{% for field in form %}
+			{{field.label}}
+			{{field}}
+			{{field.errors}}
+			{{field.help_text}}
+			<br>
+		{% endfor %}
+		<!--{{ form.as_p}} -->
 		<button type="submit" class="btn btn-primary">Create Route</button>
 </form>
 {% endblock %}

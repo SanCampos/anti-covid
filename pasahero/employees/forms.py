@@ -13,17 +13,18 @@ class CreateRouteForm(forms.ModelForm):
     class Meta:
         model = Routes
         fields = ('name', 'via', 'point_a', 'point_b')
-        help_texts = {
-            "name":"Ex: Quezon City Circle - Araneta Avenue",
-            "via":"Ex: Quezon Avenue",
-            "point_a":"Ex: Quezon City Circle",
-            "point_b":"Ex: Araneta Avenue",
-        }
         labels = {
             "name":"Route Name",
             "point_a":"Point A",
             "point_b":"Point B",
         }
+
+    def __init__(self, *args, **kwargs):
+        super(CreateRouteForm, self).__init__(*args, **kwargs)
+        self.fields['name'].widget.attrs['placeholder'] = 'Quezon City Circle - Araneta Avenue'
+        self.fields['via'].widget.attrs['placeholder'] = 'Quezon Avenue'
+        self.fields['point_a'].widget.attrs['placeholder'] = 'Quezon City Circle'
+        self.fields['point_b'].widget.attrs['placeholder'] = 'Araneta Avenue'
 
 class CreateDirectionForm(forms.ModelForm):
     class Meta:
